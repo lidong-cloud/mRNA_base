@@ -59,20 +59,54 @@
 
 ```r
 install.packages("argparser")
-```r
+```
 
-## 💻 使用方法
+### 各脚本所需依赖
 
-1. 所有脚本均需要在 Linux 系统下运行。
-2. 给脚本可执行权限：
+| 脚本/模块 | 依赖包 / 模块 |
+| :--- | :--- |
+| **mRNA_DEG** | `stringr`, `ggplot2`, `ComplexHeatmap`, `circle`, `limma`, `dplyr`, `RColorBrewer` |
+| **Volcano** | `ggplot2`, `stringr`, `dplyr` |
+| **expression** | `ggplot2`, `rstatix`, `stringr`, `ggforce`, `ggpubr`, `tibble`, `dplyr` |
+| **enrich_term** | **Python 模块**：`multiprocessing`, `argparse`, `time`, `os`, `re`；**R 包**：`ggplot2`, `clusterProfiler`, `ReactomePA`, `dplyr`, `DOSE`, `qs2`；**物种注释包**：`org.Hs.eg.db`, `org.Mm.eg.db`, `org.Rn.eg.db` |
+| **GSEA** | `clusterProfiler`, `ComplexHeatmap`, `RColorBrewer`, `enrichplot`, `msigdbr`, `ggplot2`, `dplyr` |
+| **Cor_curve** | `linkcomm`, `reshape2`, `ggplot2`, `ggrepel`, `stringr`, `tibble`, `linkET`, `WGCNA`, `dplyr` |
+| **Cor_point** | `stringr`, `ggplot2`, `ggpmisc`, `ggpubr` |
 
-   ```bash
-   chmod 755 mRNA_DEG
-3. 查看脚本帮助文档，哪些是脚本必须参数，哪些是可选参数，补全必须参数即可分析。
-   
-   ```bash
-   mRNA_DEG --help
-<div align="center">
-  <img src="https://github.com/user-attachments/assets/3949e740-d098-47fe-b9ce-8f38745fe015" width="600" alt="运行截图" />
-</div>
+---
 
+## 🚀 使用方法
+
+所有脚本均需要在 **Linux** 系统下运行。具体操作步骤如下：
+
+**1. 赋予可执行权限**
+
+```bash
+chmod 755 mRNA_DEG
+```
+
+**2. 查看帮助文档**
+
+通过 `--help` 查看脚本的必填与可选参数，补全必填参数即可开始分析。
+
+```bash
+mRNA_DEG --help
+```
+
+**3. 运行分析**
+
+根据帮助文档输入必填参数，直接运行脚本即可。
+
+---
+
+## ⚠️ 注意事项
+
+- **物种注释包**：富集分析时需根据实际物种加载对应的 `org.*.eg.db` 包（如人 `org.Hs.eg.db`、小鼠 `org.Mm.eg.db`、大鼠 `org.Rn.eg.db`）。
+- **Python 环境**：`enrich_term` 模块依赖 Python 的 `multiprocessing` 等标准库，请确保系统中已安装 Python 3 并可在命令行中调用。
+- **输入数据格式**：不同模块对输入表达矩阵的格式要求可能不同，建议先使用 `GEO` 或 `TCGA_mRNA` 目录下的脚本进行数据预处理。
+
+---
+
+## 📄 许可协议
+
+本仓库脚本仅供学习与科研参考，请遵循相关数据的使用规范与开源协议。
