@@ -1,0 +1,46 @@
+#!/nas/software/miniconda3/bin/Rscript
+args <- commandArgs(TRUE)
+
+if (length(args) < 4) {
+  stop("
+left_join indata1 indata2 id outdata
+", call.=FALSE)
+}
+
+# vi 的时先使用:set ff=unix再:wq保存运行即可。
+#indata1 <- "E:/Ledug/Desktop/OUT/TF.xls"
+#indata2 <- "E:/Ledug/Desktop/OUT/Ath_TF_list.csv"
+#id <- 'TF_ID'
+#outdata <- "E:/Ledug/Desktop/OUT/TF.anno.xls"
+
+indata1 <- args[1]
+indata2 <- args[2]
+id <- args[3]
+outdata <- args[4]
+
+library(dplyr)
+library(readr)
+
+df1 <- read.csv(indata1,sep = '\t', header = T, quote = "",check.names=FALSE)
+df2 <- read.csv(indata2,sep = '\t', header = T, quote = "",check.names=FALSE)
+print('Data has been successfully imported')
+
+df <- left_join(df1,df2, by = c(id))
+print('The two tables are linked successfully')
+
+write.table(df,file = outdata,sep = '\t', quote=FALSE, row.names = F, col.names = T)
+print('complete')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
